@@ -106,7 +106,7 @@ public class VCard implements Serializable {
 	 * 转换为VCARD格式
 	 * @return
 	 */
-	public String toVCard() {
+	public String toVCardString() {
 		//BEGIN:VCARD\nVERSION:3.0\nFN:金山\nEMAIL:yxzh73@163.com\nTEL:13581992503\nTEL;CELL:13581992504\nADR;TYPE=WORK:北京朝阳区\nORG:恒信\nTITLE:工程师\nURL:oohdear.com\nNOTE:测试\nEND:VCARD
 		StringBuffer sb = new StringBuffer("BEGIN:VCARD\nVERSION:3.0\n");
 		if (StringUtils.hasText(realName)) {
@@ -142,9 +142,9 @@ public class VCard implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Vcard [realName=" + realName + ", title=" + title + ", email=" + email + ", telephone=" + telephone
-				+ ", mobilephone=" + mobilephone + ", companyAddress=" + companyAddress + ", companyName="
-				+ companyName + ", url=" + url + ", remark=" + remark + "]";
+		return "Vcard [realName=" + realName + ", title=" + title + ", email=" + email + ", telephone=" + telephone + ", mobilephone="
+				+ mobilephone + ", companyAddress=" + companyAddress + ", companyName=" + companyName + ", url=" + url + ", remark="
+				+ remark + "]";
 	}
 
 }

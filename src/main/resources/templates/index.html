@@ -1,10 +1,173 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style type="text/css">
+.qrcode {
+	margin-top: 20px;
+}
+</style>
+<title>二维码</title>
 </head>
 <body>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+					aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Ghost </a>
+			</div>
 
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">生成二维码 <span class="sr-only">(current)</span></a></li>
+					<li><a href="#">正在建设中...</a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+	<div class="container">
+		<div class="row">
+			<div>
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="#tab-vcard" aria-controls="tab-vcard" role="tab" data-toggle="tab">名片</a></li>
+					<li role="presentation"><a href="#tab-url" aria-controls="tab-url" role="tab" data-toggle="tab">URL</a></li>
+					<li role="presentation"><a href="#tab-text" aria-controls="tab-text" role="tab" data-toggle="tab">文本</a></li>
+				</ul>
+
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="tab-vcard">
+						<div class="col-md-6 qrcode">
+							<form id="form-vcard" class="form-horizontal">
+								<div class="form-group">
+									<label for="realName" class="col-sm-2 control-label">姓名</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="realName" name="realName" placeholder="真实姓名">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="title" class="col-sm-2 control-label">职位</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="title" name="title" placeholder="职位">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="mobilephone" class="col-sm-2 control-label">手机</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="mobilephone" name="mobilephone" placeholder="手机号码">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="email" class="col-sm-2 control-label">邮箱</label>
+									<div class="col-sm-10">
+										<input type="email" class="form-control" id="email" name="email" placeholder="电子邮箱">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-10">
+										<button id="button-vcard" type="button" class="btn btn-primary btn-lg">生成二维码</button>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="col-md-6 qrcode">
+							<img id="img-vcard" width="200px" height="200px" alt="" src="">
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="tab-url">
+						<div class="col-md-6 qrcode">
+							<form id="form-url" class="form-horizontal">
+								<div class="form-group">
+									<label for="url" class="col-sm-2 control-label">URL</label>
+									<div class="col-sm-10">
+										<div class="input-group">
+											<div class="input-group-btn">
+												<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													http:// <span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu">
+													<li><a href="#">http://</a></li>
+													<li><a href="#">https://</a></li>
+												</ul>
+											</div>
+											<!-- /btn-group -->
+											<input type="text" class="form-control" aria-label="...">
+										</div>
+										<!-- /input-group -->
+										<input type="text" class="form-control" id="url" name="url" placeholder="http(s)://">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-10">
+										<button id="button-url" type="button" class="btn btn-primary btn-lg">生成二维码</button>
+									</div>
+								</div>
+							</form>
+						</div>
+
+						<div class="col-md-6 qrcode">
+							<img id="img-url" width="200px" height="200px" alt="" src="">
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="tab-text">
+						<div class="col-md-6 qrcode">
+							<form id="form-textarea" class="form-horizontal">
+								<div class="form-group">
+									<label for="textarea" class="col-sm-2 control-label">文本</label>
+									<div class="col-sm-10">
+										<textarea id="textarea" class="form-control" rows="10" placeholder="文本内容"></textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-10">
+										<button id="button-textarea" type="button" class="btn btn-primary btn-lg">生成二维码</button>
+									</div>
+								</div>
+							</form>
+						</div>
+
+						<div class="col-md-6 qrcode">
+							<img id="img-textarea" width="200px" height="200px" alt="" src="">
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
 </body>
+<script th:src="@{/js/jquery.min.js}" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script th:src="@{/js/bootstrap.min.js}" src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+	$('#button-vcard').click(
+			function() {
+				console.log('button-vcard');
+				$('#img-vcard').attr(
+						'src',
+						'/qrcode/vcard?realName=' + $('#realName').val()
+								+ '&title=' + $('#title').val()
+								+ '&mobilephone=' + $('#mobilephone').val()
+								+ '&email=' + $('#email').val());
+			});
+	$('#button-url').click(function() {
+		console.log('button-url');
+		$('#img-url').attr('src', '/qrcode/url?value=' + $('#url').val());
+	});
+	$('#button-textarea').click(
+			function() {
+				console.log('button-textarea');
+				$('#img-textarea').attr('src',
+						'/qrcode/text?value=' + $('#textarea').val());
+			});
+</script>
 </html>
