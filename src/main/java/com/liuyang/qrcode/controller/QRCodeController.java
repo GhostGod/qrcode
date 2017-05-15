@@ -25,13 +25,28 @@ public class QRCodeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(QRCodeController.class);
 
+	/**
+	 * 根据url生成二维码
+	 * @param value URL的值
+	 * @param out 输出流
+	 */
 	@RequestMapping(value = "url")
 	public void url(String value, ServletOutputStream out) {
-		text(value, out);
+		logger.info("url:{}", value);
+		generateQRCode(value, out);
 	}
 
+	/**
+	 * 根据名片信息生成二维码
+	 * @param vCard 名片信息
+	 * @param out 输出流
+	 */
 	@RequestMapping(value = "vcard")
 	public void vCard(VCard vCard, ServletOutputStream out) {
+		logger.info("vCard:{}", vCard);
+		if (vCard == null || !StringUtils.hasText(vCard.getRealName())) {
+			return;
+		}
 		try {
 			QRCodeUtil.writeToStream(vCard, out);
 		} catch (WriterException e) {
@@ -41,8 +56,23 @@ public class QRCodeController {
 		}
 	}
 
+	/**
+	 * 根据文本生成二维码
+	 * @param value 文本值
+	 * @param out 输出流
+	 */
 	@RequestMapping(value = "text")
 	public void text(String value, ServletOutputStream out) {
+		logger.info("text:{}", value);
+		generateQRCode(value, out);
+	}
+
+	/**
+	 * 根据value生成二维码
+	 * @param value 字符串类型的值
+	 * @param out 输出流
+	 */
+	private void generateQRCode(String value, ServletOutputStream out) {
 		if (!StringUtils.hasText(value)) {
 			return;
 		}
