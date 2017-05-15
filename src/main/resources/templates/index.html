@@ -56,6 +56,12 @@
 									</div>
 								</div>
 								<div class="form-group">
+									<label for="companyName" class="col-md-2 control-label">公司</label>
+									<div class="col-md-10">
+										<input type="text" class="form-control" id="companyName" name="companyName" placeholder="公司名称">
+									</div>
+								</div>
+								<div class="form-group">
 									<label for="title" class="col-md-2 control-label">职位</label>
 									<div class="col-md-10">
 										<input type="text" class="form-control" id="title" name="title" placeholder="职位">
@@ -133,7 +139,7 @@
 			function() {
 				console.log('button-vcard');
 				$('#img').removeAttr('src');
-				var url = '/qrcode/vcard?realName=' + $('#realName').val() + '&title=' + $('#title').val() + '&mobilephone='
+				var url = '/qrcode/vcard?realName=' + $('#realName').val() + '&companyName=' + $('#companyName').val() + '&title=' + $('#title').val() + '&mobilephone='
 						+ $('#mobilephone').val() + '&email=' + $('#email').val();
 				$('#img').attr('src', url);
 			});
